@@ -26,6 +26,6 @@ A simple **Spring Boot CRUD application** for managing students. This project de
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/sathvikpm/studentmanagement.git
+git clone https://github.com/sathvikpm/student-crud-app.git
 cd studentmanagement
 
