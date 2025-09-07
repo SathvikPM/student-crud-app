@@ -1,20 +1,25 @@
 package com.example.demo.controller;
 
 
+import com.example.demo.model.Student;
 import com.example.demo.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.annotation.RequestScope;
 
 @RestController
+@RequestMapping("/students")
 public class StudentController {
 
     @Autowired
     StudentService studentService;
 
-    @GetMapping("/")
-    public String greet(){
-        return "HII";
+
+    @PostMapping
+    public ResponseEntity<Student> createStudent(@RequestBody Student student){
+        Student saved=studentService.addStudent(student);
+        return ResponseEntity.status(200).body(saved);
     }
 
 

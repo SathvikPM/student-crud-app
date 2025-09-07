@@ -4,10 +4,6 @@ import com.example.demo.model.Student;
 import org.springframework.stereotype.Service;
 
 @Service
-public class StudentService {
-
-    public void addStudent() {
-        Student student=new Student();
-
-    }
+public interface StudentService {
+    Student addStudent(Student student);
 }

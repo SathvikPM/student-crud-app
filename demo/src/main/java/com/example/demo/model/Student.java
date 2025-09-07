@@ -18,8 +18,8 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
-    private String Branch;
-    private int Age;
-    private String Address;
+    private String branch;
+    private int age;
+    private String address;
     private String phoneNo;
 }
