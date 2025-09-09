@@ -3,10 +3,10 @@ package com.example.demo.controller;
 
 import com.example.demo.model.Student;
 import com.example.demo.service.StudentService;
+import com.example.demo.dto.StudentUpdateDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.annotation.RequestScope;
 
 import java.util.List;
 
@@ -39,11 +39,29 @@ public class StudentController {
         return ResponseEntity.ok(student);
     }
 
+
     @PutMapping("/{id}")
-    public ResponseEntity<Student> updateStudent(@PathVariable  long id){
-        Student updatedStudent=studentService.updateStudent(id);
-        return ResponseEntity.ok(updatedStudent);
+    public ResponseEntity<Student> updateStudent(@PathVariable long id,@RequestBody Student studentDerails){
+        Student updatedstudent=studentService.updateStudent(id,studentDerails);
+        return ResponseEntity.ok(updatedstudent);
     }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Student> partailUpdateStudent(@PathVariable long id, @RequestBody StudentUpdateDTO updates){
+        Student student=studentService.partailUpdateStudent(id,updates);
+        return ResponseEntity.ok(student);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Student> deleteStudent(@PathVariable long id){
+        Student student=studentService.deleteStudent(id);
+        return  ResponseEntity.ok(student);
+
+    }
+
+
+
+
 
 
 }

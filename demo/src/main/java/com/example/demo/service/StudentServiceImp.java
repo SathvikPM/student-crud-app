@@ -2,9 +2,9 @@ package com.example.demo.service;
 
 import com.example.demo.model.Student;
 import com.example.demo.repository.StudentRepository;
+import com.example.demo.dto.StudentUpdateDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -29,16 +29,51 @@ public class StudentServiceImp implements StudentService{
        return studentRepository.findById(id).orElse(null);
     }
 
+
     @Override
-    public Student updateStudent(long id) {
-        Student student=studentRepository.findById(id).orElse(null);
+    public Student updateStudent(long id, Student studentDetails) {
+      Student student=studentRepository.findById(id).orElse(null);
+      student.setName(studentDetails.getName());
+      student.setAge(studentDetails.getAge());
+      student.setAddress(studentDetails.getAddress());
+      student.setPhoneNo(studentDetails.getPhoneNo());
+      student.setBranch(student.getBranch());
+      studentRepository.save(student);
+      return  student;
+    }
+
+    @Override
+    public Student partailUpdateStudent(long id, StudentUpdateDTO updates) {
+        Student  student=studentRepository.findById(id).orElse(null);
         if(student==null){
             return null;
         }
-        student.setName("rakesh");
-        student.setAge(24);
-        student.setAddress("Chikamnglur");
-        student.setPhoneNo("9876543210");
+        if(updates.getName()!=null){
+            student.setName(updates.getName());
+        }
+        if(updates.getAge()!=null){
+            student.setAge(updates.getAge());
+        }
+        if(updates.getAddress()!=null){
+            student.setAddress(updates.getAddress());
+        }
+        if(updates.getBranch()!=null){
+            student.setBranch(updates.getBranch());
+        }
+        if(updates.getPhoneNo()!=null){
+            student.setPhoneNo(updates.getPhoneNo());
+        }
         return studentRepository.save(student);
+    }
+
+    @Override
+    public Student deleteStudent(long id) {
+        Student student=studentRepository.findById(id).orElse(null);
+        if(student==null){
+          return  null;
+        }
+        studentRepository.delete(student);
+        return student;
+
     }
 }
